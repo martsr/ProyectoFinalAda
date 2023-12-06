@@ -1,14 +1,15 @@
-import { createHash } from "node:crypto";
-import crypto from "node:crypto";
+import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
+
 import { PEPPER } from "../constants";
-const addSalt = () => crypto.randomUUID();
 
-const getSHA512OfPassword = (password: string, salt = addSalt()) => {
-  console.log(salt);
-  const hashedPassword = createHash("sha512")
-    .update(salt + PEPPER + password)
-    .digest("hex");
-  return `${salt}:${hashedPassword}`;
+const getSalt = () => randomBytes(15).toString("hex");
+
+const hashSeasonPassword = (password: string, salt: string) =>
+  scryptSync(password, salt + PEPPER, 45);
+
+const compareHashes = (storedHash: string, incomingHash: Buffer) => {
+  const storedHashedPasswordBuffer = Buffer.from(storedHash, "hex");
+  const match = timingSafeEqual(incomingHash, storedHashedPasswordBuffer);
+  return match;
 };
-
-export { getSHA512OfPassword };
+export { getSalt, hashSeasonPassword, compareHashes };

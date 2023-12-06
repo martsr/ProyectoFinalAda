@@ -1,3 +1,3 @@
-// import dotenv from "dotenv";
-// dotenv.config();
-// import "./index";
+import dotenv from "dotenv";
+dotenv.config();
+import "./index";
