@@ -1,19 +1,12 @@
-import fs from "fs"
-import pg from "pg"
-import url from "url"
-import dotenv from "dotenv"
-import { CREDENTIALS } from "../../constants/index"
-const config = CREDENTIALS
+// app.js
+import postgres from "postgres"
+import { DATABASE_URL } from "../../constants"
 
-const client = new pg.Client(config)
-client.connect(function (err) {
-  if (err) throw err
-  client.query("SELECT VERSION()", [], function (err, result) {
-    if (err) throw err
+const sql = postgres(DATABASE_URL, { ssl: "require" })
 
-    console.log(result.rows[0].version)
-    client.end(function (err) {
-      if (err) throw err
-    })
-  })
-})
+async function getPostgresVersion() {
+  const response = await sql`select version()`
+  console.log(response)
+}
+
+getPostgresVersion()
