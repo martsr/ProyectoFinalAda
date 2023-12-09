@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes, Model } from "sequelize"
 import Sequelize from "sequelize"
 import sequelize from "./database"
 import { string } from "zod"
@@ -9,38 +9,48 @@ import {
   compareHashes,
 } from "../utils/password-hasher"
 
-const User = sequelize.define("User", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
+class User extends Model {}
+
+User.init(
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    birthdate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    nationality: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  fullname: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  birthdate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  nationality: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-})
-// Crea la tabla en la base de datos (si no existe)
-sequelize.sync()
+  {
+    sequelize,
+    modelName: "User",
+    tableName: "Users",
+    timestamps: false,
+  }
+)
+;(async () => await User.sync({ alter: true }))()
 
 abstract class UserModel {
   static createUser = async (userData: any) => {
@@ -91,26 +101,27 @@ abstract class UserModel {
       if (!user) {
         throw new Error("User not found")
       }
-      
-      const hashedPassword = await User.findOne({where: {
-        password: password,
-      },})
-    
-      const passwordMatch = compareHashes( hashedPassword , password);
+
+      const hashedPassword = await User.findOne({
+        where: {
+          password: password,
+        },
+      })
+
+      const passwordMatch = compareHashes(hashedPassword as any, password)
 
       if (passwordMatch) {
         return {
-          message: '¡Usuario autenticado correctamente!',
+          message: "¡Usuario autenticado correctamente!",
           userInfo: user.toJSON(),
-        };
+        }
       }
 
-      return { error: 'Credenciales incorrectas' };
+      return { error: "Credenciales incorrectas" }
     } catch (error) {
-    throw error;
+      throw error
+    }
   }
-  
-  }
-
+}
 
 export default UserModel
