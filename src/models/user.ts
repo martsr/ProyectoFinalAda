@@ -87,41 +87,38 @@ abstract class UserModel {
       throw error
     }
   }
-  static async login(userCredentials: any) {
-    //falta terminar
-    try {
-      const { email, password } = userCredentials
+  //  static async login(userCredentials: any) {
+  //     //falta terminar
+  //     try {
+  //       const { email, password } = userCredentials
 
-      const user = await User.findOne({
-        where: {
-          email: email,
-        },
-      })
+  //       const user = await User.findOne({
+  //         where: {
+  //           email: email,
+  //         },
+  //       })
 
-      if (!user) {
-        throw new Error("User not found")
-      }
+  // if (!user) {
+  //   throw new Error("User not found")
+  // }
 
-      const hashedPassword = await User.findOne({
-        where: {
-          password: password,
-        },
-      })
+  //   const hashedPassword = await User.findOne({where: {
+  //     password: password,
+  //   },})
 
-      const passwordMatch = compareHashes(hashedPassword as any, password)
+  //   const passwordMatch = compareHashes( hashedPassword , password);
 
-      if (passwordMatch) {
-        return {
-          message: "¡Usuario autenticado correctamente!",
-          userInfo: user.toJSON(),
-        }
-      }
+  //   if (passwordMatch) {
+  //     return {
+  //      message: '¡Usuario autenticado correctamente!',
+  //      userInfo: user.toJSON(),
+  //   };
+  //  }
 
-      return { error: "Credenciales incorrectas" }
-    } catch (error) {
-      throw error
-    }
-  }
+  //  return { error: 'Credenciales incorrectas' };
+  //  } catch (error) {
+  //   throw error;
+  // }
 }
 
 export default UserModel

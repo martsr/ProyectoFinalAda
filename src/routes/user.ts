@@ -1,7 +1,8 @@
 import { Router } from "express"
 // import UserController from '../controllers/user';
-import { authorizeUser } from "../middlewares/token-validator"
-import { handle405Error } from "../middlewares/wrong-method-handler"
+// //import MovementController from '../controllers/movement';
+// import { authorizeUser } from '../middlewares/token-validator';
+// import { handle405Error } from '../middlewares/wrong-method-handler';
 
 const userRouter = Router()
 
@@ -10,8 +11,13 @@ const userRouter = Router()
 
 // userRouter.get('/me', authorizeUser, UserController.getInfo);
 
-userRouter.all("/", handle405Error)
-userRouter.all("/auth/token", handle405Error)
-userRouter.all("/me", handle405Error)
+// // userRouter.get('/me/movements', authorizeUser, MovementController.getAll);
+
+// // userRouter.post('/me/movements', authorizeUser, MovementController.createNew);
+
+// userRouter.all('/', handle405Error);
+// userRouter.all('/auth/token', handle405Error);
+// userRouter.all('/me', handle405Error);
+// //userRouter.all('/me/movements', handle405Error);
 
 export default userRouter
