@@ -1,4 +1,5 @@
 import { DataTypes } from "sequelize"
+import Sequelize from "sequelize"
 import sequelize from "./database"
 import { string } from "zod"
 import { getToken, verifiyToken } from "../utils/jwt"
@@ -10,9 +11,8 @@ import {
 
 const User = sequelize.define("User", {
   id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    autoIncrement: false,
+    type: DataTypes.UUID,
+    defaultValue: Sequelize.UUIDV4,
   },
   username: {
     type: DataTypes.STRING,
@@ -64,6 +64,53 @@ abstract class UserModel {
       sequelize.close()
     }
   }
-}
+  static getUserInfo = async (userId: string) => {
+    try {
+      const userFound = await User.findByPk(userId)
+
+      if (userFound) {
+        return { userInfo: userFound.toJSON() }
+      } else {
+        throw new Error("User not found")
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+  static async login(userCredentials: any) {
+    //falta terminar
+    try {
+      const { email, password } = userCredentials
+
+      const user = await User.findOne({
+        where: {
+          email: email,
+        },
+      })
+
+      if (!user) {
+        throw new Error("User not found")
+      }
+      
+      const hashedPassword = await User.findOne({where: {
+        password: password,
+      },})
+    
+      const passwordMatch = compareHashes( hashedPassword , password);
+
+      if (passwordMatch) {
+        return {
+          message: '¡Usuario autenticado correctamente!',
+          userInfo: user.toJSON(),
+        };
+      }
+
+      return { error: 'Credenciales incorrectas' };
+    } catch (error) {
+    throw error;
+  }
+  
+  }
+
 
 export default UserModel
