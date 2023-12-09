@@ -1,8 +1,11 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "../constants";
 
+//TO DO implementar refresh token
 const getToken = (data: any) => {
-  const token = jwt.sign(data, JWT_SECRET_KEY);
+  const token = jwt.sign(data, JWT_SECRET_KEY, {
+    expiresIn: "1m",
+  });
   return token;
 };
 
