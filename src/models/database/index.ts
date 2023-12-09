@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes, Model } from "sequelize";
-import { DB_PATH } from "../../constants";
+import { Sequelize, DataTypes, Model } from "sequelize"
+import { DB_PATH } from "../../constants"
 
 const sequelize = new Sequelize(DB_PATH, {
   dialectOptions: {
@@ -8,14 +8,14 @@ const sequelize = new Sequelize(DB_PATH, {
       rejectUnauthorized: false,
     },
   },
-});
+})
 async function testConnection() {
   try {
-    const test = await sequelize.authenticate();
-    return await sequelize.authenticate();
+    const test = await sequelize.authenticate()
+    return await sequelize.authenticate()
   } catch (error) {
-    return new Error("Cannot establish connection to the server");
+    return new Error("Cannot establish connection to the server")
   }
 }
-export { testConnection, DataTypes, Model };
-export default sequelize;
+export { testConnection, DataTypes, Model }
+export default sequelize
