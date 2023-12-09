@@ -1,12 +1,21 @@
-// app.js
-import postgres from "postgres"
-import { DATABASE_URL } from "../../constants"
+import { Sequelize, DataTypes, Model } from "sequelize"
+import { DB_PATH } from "../../constants"
 
-const sql = postgres(DATABASE_URL, { ssl: "require" })
-
-async function getPostgresVersion() {
-  const response = await sql`select version()`
-  console.log(response)
+const sequelize = new Sequelize(DB_PATH, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+})
+async function testConnection() {
+  try {
+    const test = await sequelize.authenticate()
+    return await sequelize.authenticate()
+  } catch (error) {
+    return new Error("Cannot establish connection to the server")
+  }
 }
-
-getPostgresVersion()
+export { testConnection, DataTypes, Model }
+export default sequelize
