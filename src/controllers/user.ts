@@ -29,19 +29,19 @@ class UserController {
     }
   }
 
-  static async loginUser(req: any, res: any) {
-    const { email, password } = req.body;
-    try {
-      const loginResult = await UserModel.login({ email, password });
-      if (loginResult.userInfo) {
-        res.status(200).json(loginResult);
-      } else {
-        res.status(401).json({ error: 'Incorrect credentials' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: 'Authentication failed' });
-    }
-  }
+  // static async loginUser(req: any, res: any) {
+  //   const { email, password } = req.body;
+  //   try {
+  //     const loginResult = await UserModel.login({ email, password });
+  //     if (loginResult.userInfo) {
+  //       res.status(200).json(loginResult);
+  //     } else {
+  //       res.status(401).json({ error: 'Incorrect credentials' });
+  //     }
+  //   } catch (error) {
+  //     res.status(500).json({ error: 'Authentication failed' });
+  //   }
+  // }
 }
 
 export default UserController;
