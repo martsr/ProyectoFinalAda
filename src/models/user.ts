@@ -1,13 +1,13 @@
-import { DataTypes, Model } from "sequelize"
-import Sequelize from "sequelize"
-import sequelize from "./database"
-import { string } from "zod"
-import { getToken, verifiyToken } from "../utils/jwt"
+import { DataTypes, Model } from "sequelize";
+import Sequelize from "sequelize";
+import sequelize from "./database";
+import { string } from "zod";
+import { generateAccessToken, verifiyToken } from "../utils/jwt";
 import {
   getSalt,
   hashSeasonPassword,
   compareHashes,
-} from "../utils/password-hasher"
+} from "../utils/password-hasher";
 
 class User extends Model {}
 
@@ -49,15 +49,15 @@ User.init(
     tableName: "Users",
     timestamps: false,
   }
-)
-;(async () => await User.sync({ alter: true }))()
+);
+(async () => await User.sync({ alter: true }))();
 
 abstract class UserModel {
   static createUser = async (userData: any) => {
     const { username, fullname, password, email, birthdate, nationality } =
-      userData
-    const salt = getSalt()
-    const hashedSeasonPassword = hashSeasonPassword(password, salt)
+      userData;
+    const salt = getSalt();
+    const hashedSeasonPassword = hashSeasonPassword(password, salt);
     try {
       const newUser = await User.create({
         username,
@@ -66,27 +66,27 @@ abstract class UserModel {
         email,
         birthdate,
         nationality,
-      })
-      console.log("User created successfully:", newUser.toJSON())
+      });
+      console.log("User created successfully:", newUser.toJSON());
     } catch (error) {
-      console.error("Error creating user:", error)
+      console.error("Error creating user:", error);
     } finally {
-      sequelize.close()
+      sequelize.close();
     }
-  }
+  };
   static getUserInfo = async (userId: string) => {
     try {
-      const userFound = await User.findByPk(userId)
+      const userFound = await User.findByPk(userId);
 
       if (userFound) {
-        return { userInfo: userFound.toJSON() }
+        return { userInfo: userFound.toJSON() };
       } else {
-        throw new Error("User not found")
+        throw new Error("User not found");
       }
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
   //  static async login(userCredentials: any) {
   //     //falta terminar
   //     try {
@@ -121,4 +121,4 @@ abstract class UserModel {
   // }
 }
 
-export default UserModel
+export default UserModel;
