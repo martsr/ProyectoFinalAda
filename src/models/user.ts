@@ -1,15 +1,19 @@
 import { DataTypes, Model } from "sequelize"
-const { STRING, DATE, UUID } = DataTypes
+const { STRING, DATE } = DataTypes
 import Sequelize from "sequelize"
 import sequelize from "./database"
-
-class User extends Model {}
+import Auth from "./auth"
+class User extends Model {
+  get id(): string {
+    return this.getDataValue("id")
+  }
+}
 
 User.init(
   {
     id: {
+      type: Sequelize.UUID,
       primaryKey: true,
-      type: UUID,
       defaultValue: Sequelize.UUIDV4,
     },
     username: {
@@ -44,6 +48,8 @@ User.init(
     timestamps: false,
   }
 )
+User.hasOne(Auth, { foreignKey: "userId" })
 ;(async () => await User.sync({ alter: true }))()
-
+//;(async () => await User.drop())()
 export default User
+
