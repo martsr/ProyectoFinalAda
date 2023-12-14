@@ -22,9 +22,6 @@ userRouter.patch("/:username", (req, res) => {
 
 //userRouter.get("/me", authorizeUser, UserController.getUserInfo);
 userRouter.get("/me", authorizeUser, (req, res) => {
-    // Lógica que necesitas antes de enviar la respuesta al cliente
-  
-    // Enviar una respuesta al cliente con el mensaje deseado
     res.status(200).json({ message: "UserController.getUserInfo" });
   });
   
