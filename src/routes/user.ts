@@ -7,43 +7,44 @@ const userRouter = Router();
 
 //userRouter.post("/", UserController.createUser);
 userRouter.post("/", (req, res) => {
-    res.status(200).json({ message: "UserController.createUser" });
-  });
-  
-//userRouter.post('/auth/token', UserController.loginUser);
-userRouter.post("/auth/token", (req, res) => {
-  res.status(200).json({ message: "UserController.loginUser" });
-});
-
-// userRouter.patch('/:username', UserController.update);
-userRouter.patch("/:username", (req, res) => {
-  res.status(200).json({ message: "UserController.update" });
+  res.status(200).json({ message: "UserController.createUser" });
 });
 
 //userRouter.get("/me", authorizeUser, UserController.getUserInfo);
 userRouter.get("/me", authorizeUser, (req, res) => {
-    res.status(200).json({ message: "UserController.getUserInfo" });
-  });
-  
+  res.status(200).json({ message: "UserController.getUserInfo" });
+});
+
+//userRouter.get("/me", authorizeUser, UserController.getAll);
+userRouter.get("/me", authorizeUser, (req, res) => {
+  res.status(200).json({ message: "UserController.getAll" });
+});
+
+// userRouter.patch('/:username', UserController.updateUser);
+userRouter.patch("/:username", (req, res) => {
+  res.status(200).json({ message: "UserController.updateUser" });
+});
+
+//userRouter.post('/auth/token', UserController.login);
+userRouter.post("/auth/token", (req, res) => {
+  res.status(200).json({ message: "UserController.login" });
+});
 
 // userRouter.delete('/logout', UserController.logout);
-userRouter.delete('/logout', (req, res) => {
-    res.status(200).json({ message: "UserController.logout" });
-  });
-  
+userRouter.delete("/logout", (req, res) => {
+  res.status(200).json({ message: "UserController.logout" });
+});
+
 // userRouter.delete('/:username', UserController.delete);
-userRouter.delete('/:username', (req, res) => {
-    res.status(200).json({ message: "UserController.delete" });
-  });
-  
+userRouter.delete("/:username", (req, res) => {
+  res.status(200).json({ message: "UserController.delete" }); // deleteUser
+});
 
 userRouter.all("/", handle405Error);
 userRouter.all("/auth/token", handle405Error);
 userRouter.all("/me", handle405Error);
 
 export default userRouter;
-
-// falta gregar update, logout y delete
 
 // import { Router } from 'express';
 // import UserController from '../controllers/user-controller';
