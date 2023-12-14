@@ -23,8 +23,9 @@ Auth.init(
     timestamps: false,
   }
 )
-// Auth.belongsTo(User, { foreignKey: "userId" })
-// ;(async () => await Auth.sync({ alter: true }))()
+User.hasOne(Auth, { foreignKey: "userId" })
+Auth.belongsTo(User, { foreignKey: "userId" })
+;(async () => await Auth.sync({ alter: true }))()
 
 export default Auth
 

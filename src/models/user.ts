@@ -52,7 +52,7 @@ User.init(
     timestamps: false,
   }
 )
-User.hasOne(Auth, { foreignKey: "userId" })
+
 ;(async () => await User.sync({ alter: true }))()
 //;(async () => await User.drop())()
 export default User
