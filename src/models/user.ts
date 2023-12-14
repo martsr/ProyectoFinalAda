@@ -32,10 +32,14 @@ User.init(
       type: STRING,
       allowNull: false,
     },
-    birthdate: {
-      type: DATE,
-      allowNull: false,
-    },
+    // birthdate: {
+    //   type: DATE,
+    //   allowNull: false,
+    // },
+    // birthdate: {
+    //   type: DATE("1990-01-01"), // o DataTypes.DATEONLY dependiendo de tus necesidades
+    //   allowNull: true,
+    // },
     nationality: {
       type: STRING,
       allowNull: false,
