@@ -60,12 +60,12 @@ class UserController {
       });
 
       const newAuth = await Auth.create({
-        userId: newUser.id,
+        userId: newUser.dataValues.id,
         password,
         // password: hashedPassword,
       });
 
-      res.status(201).json(newUser.id);
+      res.status(201).json(newUser.dataValues.id);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Error creating user" });
@@ -122,7 +122,9 @@ class UserController {
       });
       await user.save();
       if (password) {
-        const auth = await Auth.findOne({ where: { userId: user.id } });
+        const auth = await Auth.findOne({
+          where: { userId: user.dataValues.id },
+        });
         if (auth) {
           await auth.update({ password });
           await auth.save();
@@ -158,7 +160,8 @@ class UserController {
 
       const accessToken = generateAccessToken(password);
       const refreshToken = generateRefreshToken(password);
-      //Guardar en BD
+      await auth.update({ accessToken, refreshToken });
+      await auth.save();
       return res
         .status(200)
         .json({ accessToken: accessToken, refreshToken: refreshToken });
