@@ -34,7 +34,7 @@ Auth.init(
   }
 )
 UserModel.hasOne(Auth, { foreignKey: "userId" })
-Auth.belongsTo(User, { foreignKey: "userId" })
+Auth.belongsTo(UserModel, { foreignKey: "userId" })
 ;(async () => await Auth.sync({ alter: true }))()
 //;(async () => await User.drop())()
 
