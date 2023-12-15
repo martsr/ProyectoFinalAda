@@ -1,8 +1,8 @@
-import { DataTypes, Model } from "sequelize"
-const { STRING } = DataTypes
-import Sequelize from "sequelize"
-import sequelize from "./database"
-import User from "./user"
+import { DataTypes, Model } from "sequelize";
+const { STRING } = DataTypes;
+import Sequelize from "sequelize";
+import sequelize from "./database";
+//import User from "./user";
 class Auth extends Model {}
 Auth.init(
   {
@@ -22,10 +22,8 @@ Auth.init(
     tableName: "Auths",
     timestamps: false,
   }
-)
-User.hasOne(Auth, { foreignKey: "userId" })
-Auth.belongsTo(User, { foreignKey: "userId" })
-;(async () => await Auth.sync({ alter: true }))()
+);
 
-export default Auth
+// (async () => await Auth.sync({ alter: true }))();
 
+export default Auth;

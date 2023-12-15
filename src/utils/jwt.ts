@@ -3,16 +3,13 @@ import { JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } from "../constants/index";
 
 //TO DO implementar refresh token
 const generateAccessToken = (data: any) => {
-  const token = jwt.sign(data, JWT_SECRET_KEY, { expiresIn: "1m" });
+  const token = jwt.sign(data, JWT_SECRET_KEY);
+  console.log(token);
   return token;
 };
 
-const generateRefreshToken = (data: any) => {
-  const refreshToken = jwt.sign(data, JWT_REFRESH_SECRET_KEY, {
-    expiresIn: "15m",
-  });
-};
-
+const generateRefreshToken = (data: any) =>
+  jwt.sign(data, JWT_REFRESH_SECRET_KEY);
 const verifiyToken = (token: string) => {
   try {
     return jwt.verify(token, JWT_SECRET_KEY);
@@ -20,6 +17,7 @@ const verifiyToken = (token: string) => {
     return { error: "Invalid Token" };
   }
 };
+
 export { generateAccessToken, generateRefreshToken, verifiyToken };
 
 // A IMPLEMENTAR:

@@ -1,11 +1,13 @@
-import { DataTypes, Model } from "sequelize"
-const { STRING, DATE } = DataTypes
-import Sequelize from "sequelize"
-import sequelize from "./database"
-import Auth from "./auth"
+//import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model } from "./database";
+const { STRING, DATEONLY } = DataTypes;
+import Sequelize from "sequelize";
+import sequelize from "./database";
+import Auth from "./auth";
+
 class User extends Model {
   get id(): string {
-    return this.getDataValue("id")
+    return this.getDataValue("id");
   }
 }
 
@@ -32,14 +34,10 @@ User.init(
       type: STRING,
       allowNull: false,
     },
-    // birthdate: {
-    //   type: DATE,
-    //   allowNull: false,
-    // },
-    // birthdate: {
-    //   type: DATE("1990-01-01"), // o DataTypes.DATEONLY dependiendo de tus necesidades
-    //   allowNull: true,
-    // },
+    birthdate: {
+      type: DATEONLY,
+      allowNull: false,
+    },
     nationality: {
       type: STRING,
       allowNull: false,
@@ -51,9 +49,9 @@ User.init(
     tableName: "Users",
     timestamps: false,
   }
-)
-
-;(async () => await User.sync({ alter: true }))()
+);
+User.hasOne(Auth, { foreignKey: "userId" });
+Auth.belongsTo(User, { foreignKey: "userId" });
+// (async () => await User.sync({ alter: true }))();
 //;(async () => await User.drop())()
-export default User
-
+export default User;

@@ -5,40 +5,38 @@ import { handle405Error } from "../middlewares/wrong-method-handler";
 
 const userRouter = Router();
 
-//userRouter.post("/", UserController.createUser);
-userRouter.post("/", (req, res) => {
-  res.status(200).json({ message: "UserController.createUser" });
-});
+userRouter.post("/", UserController.createUser);
+// userRouter.post("/", (req, res) => {
+//   res.status(200).json({ message: "UserController.createUser" });
+// });
+userRouter.get("/all", UserController.getAll);
 
+userRouter.post("/login", UserController.login);
+
+userRouter.get("/:id", UserController.getUserInfo);
 //userRouter.get("/me", authorizeUser, UserController.getUserInfo);
-userRouter.get("/me", authorizeUser, (req, res) => {
-  res.status(200).json({ message: "UserController.getUserInfo" });
-});
+// userRouter.get("/me", authorizeUser, (req, res) => {
+//   res.status(200).json({ message: "UserController.getUserInfo" });
+// });
 
-//userRouter.get("/me", authorizeUser, UserController.getAll);
-userRouter.get("/me", authorizeUser, (req, res) => {
-  res.status(200).json({ message: "UserController.getAll" });
-});
+userRouter.patch("/:id", UserController.updateUser);
+// userRouter.patch("/:username", (req, res) => {
+//   res.status(200).json({ message: "UserController.updateUser" });
+// });
 
-// userRouter.patch('/:username', UserController.updateUser);
-userRouter.patch("/:username", (req, res) => {
-  res.status(200).json({ message: "UserController.updateUser" });
-});
-
-//userRouter.post('/auth/token', UserController.login);
-userRouter.post("/auth/token", (req, res) => {
-  res.status(200).json({ message: "UserController.login" });
-});
+// userRouter.post("/auth/token", (req, res) => {
+//   res.status(200).json({ message: "UserController.login" });
+// });
 
 // userRouter.delete('/logout', UserController.logout);
 userRouter.delete("/logout", (req, res) => {
   res.status(200).json({ message: "UserController.logout" });
 });
 
-// userRouter.delete('/:username', UserController.delete);
-userRouter.delete("/:username", (req, res) => {
-  res.status(200).json({ message: "UserController.delete" }); // deleteUser
-});
+userRouter.delete("/:id", UserController.deleteUser);
+// userRouter.delete("/:id", (req, res) => {
+//   res.status(200).json({ message: "UserController.delete" }); // deleteUser
+// });
 
 userRouter.all("/", handle405Error);
 userRouter.all("/auth/token", handle405Error);
