@@ -146,7 +146,7 @@ class UserController {
         return res.status(400).json(validatedUser.error);
 
       const user = await User.findOne({ where: { email } });
-      //const hashedPassword = getSalt();
+      const hashedPassword = getSalt();
       if (!user) {
         return res.status(401).json({ error: "Invalid credentials" });
       }
@@ -169,6 +169,19 @@ class UserController {
       res.status(500).json({ error: "Authentication failed" });
     }
   }
+
+  static async logout(req: Request, res: Response) {
+    try {
+      const { id } = req.body;
+  
+      await Auth.update({ refreshToken: null }, { where: { id } });
+  
+      return res.status(200).json({ message: "Logout exitoso" });
+    } catch (error) {
+      return res.status(500).json({ error: "Error al realizar el logout" });
+    }
+  }
+  
 
   static async deleteUser(req: Request, res: Response) {
     try {
