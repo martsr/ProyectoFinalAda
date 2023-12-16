@@ -33,6 +33,7 @@ Auth.init(
     timestamps: false,
   }
 );
+
 (async () => await Auth.sync({ alter: true }))();
 //;(async () => await User.drop())()
 
