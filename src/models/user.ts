@@ -2,13 +2,13 @@ import { DataTypes, Model } from "./database";
 const { STRING, DATEONLY } = DataTypes;
 import Sequelize from "sequelize";
 import sequelize from "./database";
-import Auth from "../models/auth";
 import {
   getSalt,
   hashSeasonPassword,
   compareHashes,
 } from "../utils/password-hasher";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import Auth from "./auth";
 
 class UserModel extends Model {
   private static async createHashedSeasonPassword(password: string) {
@@ -169,6 +169,8 @@ UserModel.init(
   }
 );
 
+UserModel.hasOne(Auth, { foreignKey: "userId" });
+//Auth.belongsTo(UserModel, { foreignKey: "userId" })
 (async () => await UserModel.sync({ alter: true }))();
 //;(async () => await User.drop())()
 export default UserModel;
