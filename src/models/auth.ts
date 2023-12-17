@@ -17,8 +17,6 @@ class Auth extends Model {
   static async getUserInfo(userID: string) {
     const user = await Auth.findByPk(userID);
     if (!user) return false;
-    // const { userId, accessToken, refreshToken } = await user.dataValues;
-    // return { userId, accessToken, refreshToken };
     return user;
   }
 
@@ -60,16 +58,7 @@ Auth.init(
     timestamps: false,
   }
 );
-// (async () => await Auth.sync({ alter: true }))();
-User.hasOne(Auth, {
-  foreignKey: {
-    name: "userId",
-    allowNull: false,
-  },
-});
-Auth.belongsTo(User, {
-  foreignKey: "userId",
-});
+(async () => await Auth.sync({ alter: true }))();
 
 // (async () => await Auth.drop())();
 

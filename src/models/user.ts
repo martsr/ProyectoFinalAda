@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "./database";
 const { STRING, DATEONLY, UUID } = DataTypes;
-import Sequelize from "sequelize";
+import Sequelize, { UnknownConstraintError } from "sequelize";
 import sequelize from "./database";
 import Auth from "../models/auth";
 import {
@@ -67,12 +67,13 @@ class User extends Model {
     return users;
   }
   static async updateUser(userData: any) {
-    const { id, username, fullname, password, email, nationality } = userData;
-    let { birthdate } = userData;
-    birthdate = new Date(birthdate);
+    const { username, fullname, password, email, birthdate, nationality } =
+      userData;
 
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { email } });
+
     if (user) {
+      const id = user.dataValues.id;
       await user.update({
         username,
         fullname,
@@ -84,15 +85,16 @@ class User extends Model {
       await user.save();
       if (password) {
         const auth = await Auth.findOne({
-          where: { userId: user.dataValues.id },
+          where: { userId: id },
         });
         if (auth) {
           await auth.update({ password });
           await auth.save();
         }
       }
+      return 200;
     }
-    return { message: "User succesfully updated" };
+    return 400;
   }
   static async login(userCredentials: any) {
     const { email, password } = userCredentials;
@@ -128,19 +130,34 @@ class User extends Model {
     return 404;
   }
 
-  static async deleteUser(userId: string) {
-    //validar existencia de id, impelentar que solo persona logueada pueda borrar su id
-    await User.destroy({
-      where: {
-        id: userId,
-      },
-    });
-    await Auth.destroy({
-      where: {
-        userId: userId,
-      },
-    });
-    return { message: "User successfully deleted", id: userId };
+  static async logout(email: string) {
+    try {
+      const user = await User.getUserInfo(email);
+      const id = user.userInfo?.dataValues.id;
+      await Auth.update({ refreshToken: null }, { where: { userId: id } });
+      return 200;
+    } catch (error) {
+      return 500;
+    }
+  }
+
+  static async deleteUser(email: string) {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) return 400;
+    const id = user.dataValues.id;
+    console.log(id);
+    try {
+      await User.destroy({
+        where: {
+          id,
+        },
+      });
+      await Auth.destroy({ where: { userId: id } });
+      return 200;
+    } catch (error) {
+      return 400;
+    }
   }
 }
 
@@ -179,7 +196,15 @@ User.init(
     timestamps: false,
   }
 );
-
+User.hasOne(Auth, {
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+});
+Auth.belongsTo(User, {
+  foreignKey: "userId",
+});
 // (async () => await User.drop())();
 (async () => await User.sync({ alter: true }))();
 

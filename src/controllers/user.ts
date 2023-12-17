@@ -50,12 +50,31 @@ class UserController {
 
   static async updateUser(req: Request, res: Response) {
     try {
-      const userData = req.body;
-      const result = await User.updateUser(userData);
+      const { username, fullname, password, email, nationality } = req.body;
+      let dataToValidate = req.body;
+      let { birthdate } = req.body;
+      if (birthdate) {
+        birthdate = new Date(birthdate);
+        dataToValidate = {
+          username,
+          fullname,
+          password,
+          email,
+          birthdate,
+          nationality,
+        };
+      }
 
-      return res.status(200).json(result);
+      const validatedData = validatePartialUser(dataToValidate);
+      if (!validatedData.success)
+        return res.status(400).json({ message: "Wrong credentials" });
+      const result = await User.updateUser(validatedData.data);
+
+      if (result == 400)
+        return res.status(400).json({ message: "Error updating user" });
+      return res.status(200).json({ message: "User updated successfully" });
     } catch (error) {
-      return res.status(500).json({ error: "Error updating user" });
+      return res.status(500).json({ message: "Error updating user" });
     }
   }
 
@@ -85,31 +104,30 @@ class UserController {
   }
 
   static async logout(req: Request, res: Response) {
-    try {
-      const { email } = req.body;
-      const user = await User.getUserInfo(email);
-      const id = user.userInfo?.dataValues.id;
-      await Auth.update({ refreshToken: null }, { where: { id } });
+    const validatedData = validatePartialUser(req.body);
+    if (!validatedData.success)
+      return res.status(400).json({ message: "Wrong credentials" });
+    const { email } = validatedData.data as any;
+
+    const userLogOut = await User.logout(email);
+
+    if (userLogOut == 200)
       return res.status(200).json({ message: "Sucessful logout" });
-    } catch (error) {
-      return res.status(500).json({ error: "Error at logout" });
-    }
+
+    return res.status(500).json({ error: "Error at logout" });
   }
 
   static async deleteUser(req: Request, res: Response) {
-    try {
-      const { email } = req.body;
-      const user = await User.getUserInfo(email);
-      if (user) {
-        const id = user.userInfo?.dataValues.id;
-        await User.deleteUser(id);
-        return res
-          .status(200)
-          .json({ message: "User successfully deleted", id: id });
-      }
-    } catch (error) {
+    const validatedData = validatePartialUser(req.body);
+    if (!validatedData.success)
+      return res.status(400).json({ message: "Wrong credentials" });
+    const { email } = validatedData.data as any;
+    const result = await User.deleteUser(email);
+    if (result == 400)
       return res.status(500).json({ error: "Error deleting user" });
-    }
+    return res
+      .status(200)
+      .json({ message: "User successfully deleted", id: result });
   }
 }
 
