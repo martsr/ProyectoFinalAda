@@ -16,10 +16,20 @@ class Auth extends Model {
   }
   static async getUserInfo(userID: string) {
     const user = await Auth.findByPk(userID);
-    console.log(user);
     if (!user) return false;
-    const { userId, accessToken, refreshToken } = await user.dataValues;
-    return { userId, accessToken, refreshToken };
+    // const { userId, accessToken, refreshToken } = await user.dataValues;
+    // return { userId, accessToken, refreshToken };
+    return user;
+  }
+
+  static async updateUserAccessToken(userId: string, accessToken: string) {
+    const auth = await this.getUserInfo(userId);
+    if (auth) {
+      await auth.update({ accessToken });
+      await auth.save();
+      return true;
+    }
+    return { error: "Please login again" };
   }
 }
 Auth.init(

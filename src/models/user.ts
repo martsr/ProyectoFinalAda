@@ -57,8 +57,8 @@ class User extends Model {
       id: newUser.dataValues.id,
     };
   }
-  static async getUserInfo(userId: string) {
-    const userInfo = await User.findByPk(userId);
+  static async getUserInfo(email: string) {
+    const userInfo = await User.findOne({ where: { email } });
     return { userInfo };
   }
 
@@ -84,7 +84,7 @@ class User extends Model {
       await user.save();
       if (password) {
         const auth = await Auth.findOne({
-          where: { userId: id },
+          where: { userId: user.dataValues.id },
         });
         if (auth) {
           await auth.update({ password });
