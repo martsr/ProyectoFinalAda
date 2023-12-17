@@ -146,7 +146,7 @@ class User extends Model {
 
     if (!user) return 400;
     const id = user.dataValues.id;
-    console.log(id);
+
     try {
       await User.destroy({
         where: {
