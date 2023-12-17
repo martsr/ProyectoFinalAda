@@ -1,8 +1,8 @@
-import { DataTypes, Model } from "sequelize"
-const { STRING, UUID, UUIDV4 } = DataTypes
+import { DataTypes, Model } from "sequelize";
+const { STRING, UUID, UUIDV4 } = DataTypes;
 
-import sequelize from "./database"
-import User from "./user"
+import sequelize from "./database";
+import User from "./user";
 
 class Auth extends Model {
   static async createAuth(user: any) {
@@ -11,8 +11,15 @@ class Auth extends Model {
       password: user.password,
       accessToken: null,
       refreshToken: null,
-    })
-    return newAuth
+    });
+    return newAuth;
+  }
+  static async getUserInfo(userID: string) {
+    const user = await Auth.findByPk(userID);
+    console.log(user);
+    if (!user) return false;
+    const { userId, accessToken, refreshToken } = await user.dataValues;
+    return { userId, accessToken, refreshToken };
   }
 }
 Auth.init(
@@ -42,20 +49,18 @@ Auth.init(
     tableName: "Auths",
     timestamps: false,
   }
-)
+);
+// (async () => await Auth.sync({ alter: true }))();
 User.hasOne(Auth, {
   foreignKey: {
     name: "userId",
     allowNull: false,
   },
-})
-User.hasOne(Auth, {
-  foreignKey: "userId",
-})
+});
 Auth.belongsTo(User, {
   foreignKey: "userId",
-})
-;(async () => await Auth.sync({ alter: true }))()
-//;(async () => await Auth.drop())()
+});
 
-export default Auth
+// (async () => await Auth.drop())();
+
+export default Auth;

@@ -33,7 +33,7 @@ userRouter.delete("/logout", (req, res) => {
   res.status(200).json({ message: "UserController.logout" });
 });
 
-userRouter.delete("/:id", UserController.deleteUser);
+userRouter.delete("/:id", authorizeUser, UserController.deleteUser);
 // userRouter.delete("/:id", (req, res) => {
 //   res.status(200).json({ message: "UserController.delete" }); // deleteUser
 // });
