@@ -1,21 +1,31 @@
-import { DataTypes, Model } from "sequelize";
-const { STRING } = DataTypes;
-import Sequelize from "sequelize";
-import sequelize from "./database";
-import UserModel from "./user";
+import { DataTypes, Model } from "sequelize"
+const { STRING, UUID, UUIDV4 } = DataTypes
 
-class Auth extends Model {}
+import sequelize from "./database"
+import User from "./user"
 
+class Auth extends Model {
+  static async createAuth(user: any) {
+    const newAuth = await Auth.create({
+      userId: user.id,
+      password: user.password,
+      accessToken: null,
+      refreshToken: null,
+    })
+    return newAuth
+  }
+}
 Auth.init(
   {
     userId: {
-      primaryKey: false,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: STRING,
+      primaryKey: true,
+      allowNull: false,
     },
     password: {
       type: STRING,
       allowNull: false,
+      unique: true,
     },
     accessToken: {
       type: STRING,
@@ -32,9 +42,20 @@ Auth.init(
     tableName: "Auths",
     timestamps: false,
   }
-);
+)
+User.hasOne(Auth, {
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+})
+User.hasOne(Auth, {
+  foreignKey: "userId",
+})
+Auth.belongsTo(User, {
+  foreignKey: "userId",
+})
+;(async () => await Auth.sync({ alter: true }))()
+//;(async () => await Auth.drop())()
 
-(async () => await Auth.sync({ alter: true }))();
-//;(async () => await User.drop())()
-
-export default Auth;
+export default Auth
