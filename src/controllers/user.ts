@@ -1,9 +1,8 @@
 import { Request, Response } from "express"
-import Auth from "../models/auth"
 import User from "../models/user"
 import { validatePartialUser, validateUser } from "../schemas/user"
 import logger from "../utils/logger"
-import { log } from "winston"
+
 class UserController {
   static async createUser(req: Request, res: Response) {
     const { username, fullname, password, email, nationality } = req.body
