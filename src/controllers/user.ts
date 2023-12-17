@@ -30,9 +30,9 @@ class UserController {
   }
 
   static async getUserInfo(req: Request, res: Response) {
-    const userId = req.params.id;
+    const { email } = req.body;
     try {
-      const user = await User.getUserInfo(userId);
+      const user = await User.getUserInfo(email);
       res.status(200).json(user);
     } catch (error) {
       res.status(404).json({ error: "User not found" });
@@ -86,23 +86,27 @@ class UserController {
 
   static async logout(req: Request, res: Response) {
     try {
-      const { id } = req.body;
-
+      const { email } = req.body;
+      const user = await User.getUserInfo(email);
+      const id = user.userInfo?.dataValues.id;
       await Auth.update({ refreshToken: null }, { where: { id } });
-      return res.status(200).json({ message: "Logout exitoso" });
+      return res.status(200).json({ message: "Sucessful logout" });
     } catch (error) {
-      return res.status(500).json({ error: "Error al realizar el logout" });
+      return res.status(500).json({ error: "Error at logout" });
     }
   }
 
   static async deleteUser(req: Request, res: Response) {
     try {
-      return res.status(200).json({ message: "DELETE THIS" });
-      const { id } = req.params;
-      await User.deleteUser(id);
-      return res
-        .status(200)
-        .json({ message: "User successfully deleted", id: id });
+      const { email } = req.body;
+      const user = await User.getUserInfo(email);
+      if (user) {
+        const id = user.userInfo?.dataValues.id;
+        await User.deleteUser(id);
+        return res
+          .status(200)
+          .json({ message: "User successfully deleted", id: id });
+      }
     } catch (error) {
       return res.status(500).json({ error: "Error deleting user" });
     }
