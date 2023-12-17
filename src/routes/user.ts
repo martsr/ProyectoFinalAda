@@ -2,7 +2,7 @@ import { Router } from "express";
 import UserController from "../controllers/user";
 import { authorizeUser } from "../middlewares/token-validator";
 import { handle405Error } from "../middlewares/wrong-method-handler";
-import User from "../models/user";
+
 
 const userRouter = Router();
 
