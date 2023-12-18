@@ -24,7 +24,7 @@ class UserController {
         return res.status(400).json(validatedData.error)
       }
 
-      const response = await User.createUser(validatedData.data)
+    const response = await User.createUser(validatedData.data)
       logger.info("User succesfully created")
       return res.status(201).json(response)
     } catch (error) {
@@ -32,6 +32,7 @@ class UserController {
       return res.status(500).json({ message: "Error creating user" })
     }
   }
+
 
   static async getUserInfo(req: Request, res: Response) {
     const { email } = req.body

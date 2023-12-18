@@ -15,3 +15,10 @@
 { message: 'Server running on port 45000', level: 'info' }
 { message: 'The data entered is incorrect', level: 'error' }
 { message: 'User succesfully created', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'The data entered is incorrect', level: 'error' }
