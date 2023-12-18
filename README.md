@@ -22,7 +22,7 @@ La entidad usuario tiene los siguientes campos:
 - id: string
 - username: string
 - fullname: string
-- password: string (8 caracteres como minimo, debe incluir numeros, letras en mayúsculas y minúsculas, y caracteres especiales)
+- password: string (8 caracteres como mínimo, debe incluir numeros, letras en mayúsculas y minúsculas, y caracteres especiales)
 - email: string
 - birthdate: Date
 - nationality: string
@@ -40,6 +40,9 @@ La entidad usuario tiene los siguientes campos:
   - controllers
     - user.ts
     - server.ts
+  - logs
+    - error.log
+    - user.log
   - middlewares
     - request-logger.ts
     - token-validator.ts
@@ -48,6 +51,7 @@ La entidad usuario tiene los siguientes campos:
   - models
     - database
       - index.ts
+      - sync-db.ts
     - auth.ts
     - user.ts
   - researchs
@@ -61,6 +65,7 @@ La entidad usuario tiene los siguientes campos:
     - user.ts
   - utils
     - jws.ts
+    - logger.ts
     - password-hasher.ts
   - app.ts
   - dev.ts
@@ -79,8 +84,6 @@ La entidad usuario tiene los siguientes campos:
   https://universal-crater-143962.postman.co/workspace/88539435-957a-44d4-9642-baaa6ebad78b/request/29858323-24f0c4c1-acd7-403d-a330-811b736f18a5
 
 ### Endpoints  
-
-(Completar con auth y token)
 
 - Register: Crear un nuevo usuario
   POST /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
