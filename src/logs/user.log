@@ -1,2 +1,17 @@
 
 { message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'User succesfully created', level: 'info' }
