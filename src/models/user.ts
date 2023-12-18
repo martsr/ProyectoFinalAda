@@ -9,6 +9,8 @@ import {
   compareHashes,
 } from "../utils/password-hasher";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import { Console } from "winston/lib/winston/transports";
+import { log } from "winston";
 
 class User extends Model {
   static associate(models: any) {
@@ -100,7 +102,6 @@ class User extends Model {
     const { email, password } = userCredentials;
 
     const user = await User.findOne({ where: { email } });
-
     if (user) {
       const auth = await Auth.findOne({
         where: { userId: user.dataValues.id },
@@ -113,12 +114,15 @@ class User extends Model {
         const hashedPassword = hashSeasonPassword(password, salt);
         const equalPasswords = compareHashes(dbHashedPassword, hashedPassword);
 
+
         if (equalPasswords) {
+
           const refreshToken = generateRefreshToken(user.dataValues.id);
           const accessToken = generateAccessToken(user.dataValues.id);
 
           await auth.update({ accessToken, refreshToken });
           await auth.save();
+
           return {
             message: "User logged successfully!",
             accessToken,

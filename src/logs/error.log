@@ -6,3 +6,42 @@
 { message: 'The data entered is incorrect', level: 'error' }
 { message: 'The data entered is incorrect', level: 'error' }
 { message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error deleting user', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }

@@ -25,3 +25,84 @@
 { message: 'Server running on port 45000', level: 'info' }
 { message: 'The data entered is incorrect', level: 'error' }
 { message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Error in login process', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User logged in successfully', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'User has been successfully updated', level: 'info' }
+{ message: 'User updated successfully', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User logged in successfully', level: 'info' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'User has been successfully updated', level: 'info' }
+{ message: 'User updated successfully', level: 'info' }
+{ message: 'Users found', level: 'info' }
+{ message: 'User logged in successfully', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'The data entered is incorrect', level: 'error' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'Error deleting user', level: 'error' }
+{ message: 'User successfully deleted', level: 'info' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Wrong credentials', level: 'error' }
+{ message: 'Wrong credentials', level: 'error' }

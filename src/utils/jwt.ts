@@ -11,6 +11,7 @@ const verifiyToken = (token: string) => jwt.verify(token, JWT_SECRET_KEY);
 
 const verifiyRefreshToken = (token: string) =>
   jwt.verify(token, JWT_REFRESH_SECRET_KEY);
+
 export {
   generateAccessToken,
   generateRefreshToken,

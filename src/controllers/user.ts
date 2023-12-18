@@ -105,6 +105,7 @@ class UserController {
         return res.status(400).json({ message: "Wrong credentials" });
       }
 
+      
       const { email, password } = validatedData.data as any;
       const user = await User.login({ email, password });
       if (user == 404) {

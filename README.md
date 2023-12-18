@@ -88,13 +88,12 @@ La entidad usuario tiene los siguientes campos:
 - Register: Crear un nuevo usuario
   POST /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
-  Ejemplo: 
   {
     "username": "test",
     "fullname": "test test",
     "password": "A123&b45",
     "email": "test@gmail.com",
-    "birthdate": "01/01/1980",
+    "birthdate": "2010.05.25",
     "nationality": "Argentina"
   }
 
@@ -102,25 +101,33 @@ La entidad usuario tiene los siguientes campos:
 
   POST /v1/api/users/login
 
+  {
+    "email": "testpass@gmail.com",
+    "password": "A123&b45"
+  }  
+
 - Update: Actualizar la información relativa a un usuario
 
-  PATCH /V1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
+  PATCH /V1/api/users/me
+
+  {
+    "email": "test@gmail.com",
+    "fullname": "test update",
+    "birthdate": "2001.12.03"
+  }
 
 - Delete: Eliminar un usuario
 
-  DELETE /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
+  DELETE /v1/api/users/me
+
+  {"email": "email@gmail.com}
 
 - Logout: Cierre de sesión
 
-  DELETE /v1/api/logout/fb1da8d1-9e4b-4c00-a688-40b051780b28
+  DELETE /v1/api/logout 
 
-- Get all Users (no fue solicitado)
+  {"email": "email@gmail.com}
 
-  GET /v1/api/users/all
-
-- Get User (no fue solicitado)
-
-  GET /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
 
 
