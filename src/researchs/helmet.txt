@@ -1,0 +1,7 @@
+Link de referencia: https://helmetjs.github.io
+
+
+Ayuda a mitigar varios ataques seteando los headers the respuesta de HTTP. 
+Se tiene que instalar en app. Seguir esta documentacion: 
+
+https://expressjs.com/en/advanced/best-practice-security.html#use-helmet
