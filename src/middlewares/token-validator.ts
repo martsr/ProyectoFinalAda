@@ -41,8 +41,15 @@ async function authorizeUser(req: Request, res: Response, next: NextFunction) {
         return res.status(404).json({ error: "Wrong Credentials" });
 
       const newAccessToken = generateAccessToken(refresh.data);
+
       try {
         await Auth.updateUserAccessToken(refresh.data, newAccessToken);
+        res
+          .cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            sameSite: "strict",
+          })
+          .set("Authorization", newAccessToken);
         next();
       } catch (error) {
         return res

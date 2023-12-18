@@ -45,3 +45,4 @@
 { message: 'Wrong credentials', level: 'error' }
 { message: 'Wrong credentials', level: 'error' }
 { message: 'Wrong credentials', level: 'error' }
+{ message: 'Error updating user', level: 'error' }

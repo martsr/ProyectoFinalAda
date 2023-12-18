@@ -47,18 +47,6 @@ class UserController {
     }
   }
 
-  static async getAll(req: Request, res: Response) {
-    try {
-      const users = await User.findAll();
-
-      res.status(200).json(users);
-      logger.info("Users found");
-    } catch (error) {
-      res.status(404).json({ message: "Users not found" });
-      logger.error("Users not found");
-    }
-  }
-
   static async updateUser(req: Request, res: Response) {
     try {
       const { username, fullname, password, email, nationality } = req.body;
@@ -105,7 +93,6 @@ class UserController {
         return res.status(400).json({ message: "Wrong credentials" });
       }
 
-      
       const { email, password } = validatedData.data as any;
       const user = await User.login({ email, password });
       if (user == 404) {
@@ -120,6 +107,7 @@ class UserController {
           httpOnly: true,
           sameSite: "strict",
         })
+        .set("Authorization", accessToken)
         .send({
           message: "User logged in successfully",
           accessToken: accessToken,

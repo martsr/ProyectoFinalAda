@@ -17,8 +17,9 @@ Sistema de autenticación de usuarios, con arquitectura REST y MVC, que permite:
 - Update: Actualizar la información relativa a un usuario
 - Delete: Eliminar un usuario
 
-## Sistema de BD: 
-  Neon ( https://neon.tech/)
+## Sistema de BD:
+
+Neon ( https://neon.tech/)
 
 La Base de Datos tiene las tablas:
 
@@ -31,15 +32,12 @@ La Base de Datos tiene las tablas:
 - birthdate: date
 - nationality: string
 
-
-### AUTH  que contiene los siguientes campos
+### AUTH que contiene los siguientes campos
 
 - accessToken: string
 - password: string (8 caracteres como mínimo, debe incluir numeros, letras en mayúsculas y minúsculas, y caracteres especiales)
 - refreshToken: string
 - userId: string
-
-Cuando se vence el token de acceso y el de refresh no está vencido, se actualiza con el nuevo token automáticamente.
 
 ## Estructura del Proyecto:
 
@@ -86,69 +84,73 @@ Cuando se vence el token de acceso y el de refresh no está vencido, se actualiz
 - README.md
 - tsconfig.json
 
-
 ## Link de Postman:
 
 - WEB
   https://universal-crater-143962.postman.co/workspace/88539435-957a-44d4-9642-baaa6ebad78b/request/29858323-24f0c4c1-acd7-403d-a330-811b736f18a5
 
-### Endpoints  
+### Endpoints
 
 - Status: Estado del servidor
-  
+
   GET /v1/api/status
 
 - Register: Crear un nuevo usuario
-  
-  POST /v1/api/users
 
+  POST /v1/api/users
+  En el body se debera enviar la siguiente informacion:
   {
-    "username": "test",
-    "fullname": "test test",
-    "password": "A123&b45",
-    "email": "test@gmail.com",
-    "birthdate": "2010.05.25",
-    "nationality": "Argentina"
+  "username": "test",
+  "fullname": "test test",
+  "password": "A123&b45",
+  "email": "test@gmail.com",
+  "birthdate": "2010.05.25",
+  "nationality": "Argentina"
   }
 
 - Login: Inicio de sesión
 
   POST /v1/api/users/login
-
+  En el body se debera enviar la siguiente informacion:
   {
-    "email": "testpass@gmail.com",
-    "password": "A123&b45"
-  }  
+  "email": "testpass@gmail.com",
+  "password": "A123&b45"
+  }
 
 - Update: Actualizar la información relativa a un usuario
 
   PATCH /V1/api/users/me
-
+  En el body se debera enviar la siguiente informacion ( el email es de caracter obligtorio):
   {
-    "email": "test@gmail.com",
-    "fullname": "test update",
-    "birthdate": "2001.12.03"
+  "email": "test@gmail.com",
+  "fullname": "test update",
+  "birthdate": "2001.12.03"
   }
 
 - Get: Consultar info de un usuario
 
   GET /V1/api/users/me
-
+  En el body se deber enviar la siguiente informacion:
   {"email": "email@gmail.com}
 
 - Delete: Eliminar un usuario
 
   DELETE /v1/api/users/me
-
+  En el body se deber enviar la siguiente informacion:
   {"email": "email@gmail.com}
 
 - Logout: Cierre de sesión
 
-  DELETE /v1/api/logout 
-
+  DELETE /v1/api/logout
+  En el body se deber enviar la siguiente informacion:
   {"email": "email@gmail.com}
 
+Los siguientes endpoints utilizan un middleware para poder verificar si el usuario posee permisos al recurso:
 
+- Update
+- Get user info
+- Delete
+- Logout
 
-
-
+Para todos los casos el usuario que esta logueado solamente podra ejecutar acciones sobre si mismo.
+El middeware de autenticacion utiliza refresh tokens. Una vez que se vencion el access token pero no el refresh se enviara automaticamente en el header el nuevo access token que tambien se guardara en la BD lo que evitara que el usuario se tenga que loguear nuevamente. Esta ultima accion se debera realizar solamente cuando el refresh token este vencido, esto se le comunicara a traves de un mensaje al usuario.

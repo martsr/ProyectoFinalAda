@@ -106,3 +106,36 @@
 { message: 'Server running on port 45000', level: 'info' }
 { message: 'Wrong credentials', level: 'error' }
 { message: 'Wrong credentials', level: 'error' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User succesfully created', level: 'info' }
+{ message: 'User logged in successfully', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User has been successfully updated', level: 'info' }
+{ message: 'Error updating user', level: 'error' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'User found', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }

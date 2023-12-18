@@ -9,8 +9,6 @@ import {
   compareHashes,
 } from "../utils/password-hasher";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
-import { Console } from "winston/lib/winston/transports";
-import { log } from "winston";
 
 class User extends Model {
   static associate(models: any) {
@@ -64,10 +62,6 @@ class User extends Model {
     return { userInfo };
   }
 
-  static async getAll() {
-    const users = await User.findAll({ limit: 10 });
-    return users;
-  }
   static async updateUser(userData: any) {
     const { username, fullname, password, email, birthdate, nationality } =
       userData;
@@ -114,9 +108,7 @@ class User extends Model {
         const hashedPassword = hashSeasonPassword(password, salt);
         const equalPasswords = compareHashes(dbHashedPassword, hashedPassword);
 
-
         if (equalPasswords) {
-
           const refreshToken = generateRefreshToken(user.dataValues.id);
           const accessToken = generateAccessToken(user.dataValues.id);
 
