@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as pkg from "../../psckage.json";
+import * as pkg from "../../package.json";
 
 abstract class ServerController {
   static async getStatus(req: Request, res: Response) {
