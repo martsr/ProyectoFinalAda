@@ -17,20 +17,29 @@ Sistema de autenticación de usuarios, con arquitectura REST y MVC, que permite:
 - Update: Actualizar la información relativa a un usuario
 - Delete: Eliminar un usuario
 
-La entidad usuario tiene los siguientes campos:
-
-- id: string
-- username: string
-- fullname: string
-- password: string (8 caracteres como mínimo, debe incluir numeros, letras en mayúsculas y minúsculas, y caracteres especiales)
-- email: string
-- birthdate: Date
-- nationality: string
-
-
 ## Sistema de BD: 
   Neon ( https://neon.tech/)
 
+La Base de Datos tiene las tablas:
+
+### USERS que contiene los siguientes campos
+
+- userId: string
+- username: string
+- fullname: string
+- email: email
+- birthdate: date
+- nationality: string
+
+
+### AUTH  que contiene los siguientes campos
+
+- accessToken: string
+- password: string (8 caracteres como mínimo, debe incluir numeros, letras en mayúsculas y minúsculas, y caracteres especiales)
+- refreshToken: string
+- userId: string
+
+Cuando se vence el token de acceso y el de refresh no está vencido, se actualiza con el nuevo token automáticamente.
 
 ## Estructura del Proyecto:
 
@@ -85,6 +94,10 @@ La entidad usuario tiene los siguientes campos:
 
 ### Endpoints  
 
+- Status: Estado del servidor
+  
+  GET /v1/api/status
+
 - Register: Crear un nuevo usuario
   
   POST /v1/api/users
@@ -116,6 +129,12 @@ La entidad usuario tiene los siguientes campos:
     "fullname": "test update",
     "birthdate": "2001.12.03"
   }
+
+- Get: Consultar info de un usuario
+
+  GET /V1/api/users/me
+
+  {"email": "email@gmail.com}
 
 - Delete: Eliminar un usuario
 
