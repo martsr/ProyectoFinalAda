@@ -86,6 +86,7 @@ La entidad usuario tiene los siguientes campos:
 ### Endpoints  
 
 - Register: Crear un nuevo usuario
+- 
   POST /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
   {
