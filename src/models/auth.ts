@@ -1,8 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-const { STRING, UUID, UUIDV4 } = DataTypes;
+const { STRING } = DataTypes;
 
 import sequelize from "./database";
-import User from "./user";
 
 class Auth extends Model {
   static async createAuth(user: any) {

@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "./database";
 const { STRING, DATEONLY, UUID } = DataTypes;
-import Sequelize, { UnknownConstraintError } from "sequelize";
+import Sequelize from "sequelize";
 import sequelize from "./database";
 import Auth from "../models/auth";
 import {

@@ -20,7 +20,9 @@ userRouter.delete("/logout", authorizeUser, UserController.logout);
 userRouter.delete("/me", authorizeUser, UserController.deleteUser);
 
 userRouter.all("/", handle405Error);
+
 userRouter.all("/auth/token", handle405Error);
+
 userRouter.all("/me", handle405Error);
 
 export default userRouter;
