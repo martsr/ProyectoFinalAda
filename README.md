@@ -7,13 +7,6 @@ Integrantes:
     Sol Lereah
     Verónica Espejo
 
-    Tareas (borrarlo)
-
-    Sol - Model
-    Vero - Controller
-    Grace - Routes & schema
-    Martu - Middlewares & utils, index, dev, app, constants
-
 ### Descripción:
 
 Sistema de autenticación de usuarios, con arquitectura REST y MVC, que permite:
@@ -80,64 +73,50 @@ La entidad usuario tiene los siguientes campos:
 - tsconfig.json
 
 
-## Links de Postman:
+## Link de Postman:
 
 - WEB
   https://universal-crater-143962.postman.co/workspace/88539435-957a-44d4-9642-baaa6ebad78b/request/29858323-24f0c4c1-acd7-403d-a330-811b736f18a5
 
 ### Endpoints  
 
-(Corregir agregando auth/token donde corresponda)
-
-- Get API status (No fue solicitado)
-  GET /v1/api/status 
-
-{   
-    "name":"tp--final",
-    "version":"1.0.0",
-    "description":"",
-    "author":"",
-    "server":"running",
-    "database":"connected"
-}
+(Completar con auth y token)
 
 - Register: Crear un nuevo usuario
   POST /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
- 
+
+  Ejemplo: 
   {
     "username": "test",
     "fullname": "test test",
-    "password": "12345678",
+    "password": "A123&b45",
     "email": "test@gmail.com",
     "birthdate": "01/01/1980",
     "nationality": "Argentina"
   }
 
 - Login: Inicio de sesión
+
   POST /v1/api/users/login
 
-  {
-    "email":"test@test.com",
-    "password":"a1234tt78"
-  }
-
 - Update: Actualizar la información relativa a un usuario
+
   PATCH /V1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
-  {  
-    "birthdate": "12.12.1990" 
-  }
-
 - Delete: Eliminar un usuario
+
   DELETE /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
 - Logout: Cierre de sesión
+
   DELETE /v1/api/logout/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
-- Get all Users (no ue solicitado)
+- Get all Users (no fue solicitado)
+
   GET /v1/api/users/all
 
-- Get User  (no fue solicitado)
+- Get User (no fue solicitado)
+
   GET /v1/api/users/fb1da8d1-9e4b-4c00-a688-40b051780b28
 
 
