@@ -145,6 +145,8 @@ La Base de Datos tiene las tablas:
   En el body se deber enviar la siguiente informacion:
   {"email": "email@gmail.com}
 
+### Refersh Tokens
+
 Los siguientes endpoints utilizan un middleware para poder verificar si el usuario posee permisos al recurso:
 
 - Update
@@ -152,5 +154,5 @@ Los siguientes endpoints utilizan un middleware para poder verificar si el usuar
 - Delete
 - Logout
 
-Para todos los casos el usuario que esta logueado solamente podra ejecutar acciones sobre si mismo.
-El middeware de autenticacion utiliza refresh tokens. Una vez que se vencion el access token pero no el refresh se enviara automaticamente en el header el nuevo access token que tambien se guardara en la BD lo que evitara que el usuario se tenga que loguear nuevamente. Esta ultima accion se debera realizar solamente cuando el refresh token este vencido, esto se le comunicara a traves de un mensaje al usuario.
+Para todos los casos, el usuario que esta logueado solamente podra ejecutar acciones sobre sí mismo.
+El middeware de autenticación utiliza refresh tokens. Una vez que se venció el access token, pero no el refresh, se enviará automáticamente en el header el nuevo access token, que además se guardará en la BD. Esto evitará que el usuario se tenga que loguear nuevamente. Esta última acción, se deberá realizar solamente cuando el refresh token esté vencido y en ese caso el usuario recibirá un mensaje para que se vuelva a loguear. 

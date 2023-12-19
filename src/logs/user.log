@@ -139,3 +139,5 @@
 { message: 'User found', level: 'info' }
 { message: 'User found', level: 'info' }
 { message: 'Server running on port 45000', level: 'info' }
+{ message: 'Server running on port 45000', level: 'info' }
+{ message: 'User succesfully created', level: 'info' }

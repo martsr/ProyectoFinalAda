@@ -1,19 +1,46 @@
-REFRESH TOKENS
+## REFRESH TOKENS
 
-En el contexto de la arquitectura REST (Representational State Transfer), los "refresh tokens" son un componente importante en el proceso de autenticación y autorización, especialmente cuando se utiliza OAuth 2.0, que es un protocolo ampliamente utilizado para la autenticación y autorización en aplicaciones web y servicios.
+En el contexto de la arquitectura REST (Representational State Transfer), los "refresh tokens" son un componente importante 
+en el proceso de autenticación y autorización, especialmente cuando se utiliza OAuth 2.0, que es un protocolo ampliamente 
+utilizado para la autenticación y autorización en aplicaciones web y servicios.
 
-Cuando un usuario autentica una aplicación y se le otorga un token de acceso (también llamado "access token"), este token tiene una duración limitada. Los "refresh tokens" son utilizados para obtener un nuevo token de acceso sin requerir que el usuario vuelva a autenticarse. Este proceso es útil para mantener la seguridad y controlar el acceso a los recursos, al tiempo que ofrece una experiencia de usuario más fluida, ya que no es necesario ingresar credenciales cada vez que expire un token.
+Cuando un usuario autentica una aplicación y se le otorga un token de acceso (también llamado "access token"), este token 
+tiene una duración limitada. Los "refresh tokens" son utilizados para obtener un nuevo token de acceso sin requerir que el 
+usuario vuelva a autenticarse. Este proceso es útil para mantener la seguridad y controlar el acceso a los recursos, al 
+tiempo que ofrece una experiencia de usuario más fluida, ya que no es necesario ingresar credenciales cada vez que expire 
+un token.
 
 El flujo típico de uso de "refresh tokens" en una arquitectura REST sería algo así:
 
-1. **Autenticación Inicial:** El usuario inicia sesión en la aplicación y se le proporciona un token de acceso y un "refresh token" después de la autenticación exitosa.
+1. **Autenticación Inicial:** El usuario inicia sesión en la aplicación y se le proporciona un token de acceso y un 
+"refresh token" después de la autenticación exitosa.
 
-2. **Uso del Token de Acceso:** La aplicación utiliza el token de acceso para realizar solicitudes a recursos protegidos en nombre del usuario.
+2. **Uso del Token de Acceso:** La aplicación utiliza el token de acceso para realizar solicitudes a recursos protegidos en 
+nombre del usuario.
 
-3. **Expiración del Token de Acceso:** Los tokens de acceso tienen una duración limitada por razones de seguridad. Cuando un token de acceso expira, la aplicación intenta renovarlo utilizando el "refresh token" asociado.
+3. **Expiración del Token de Acceso:** Los tokens de acceso tienen una duración limitada por razones de seguridad. Cuando un 
+token de acceso expira, la aplicación intenta renovarlo utilizando el "refresh token" asociado.
 
-4. **Renovación del Token de Acceso:** La aplicación envía una solicitud al servidor de autorización (a menudo utilizando un punto final dedicado) junto con el "refresh token". Si el "refresh token" es válido, el servidor emite un nuevo token de acceso y, opcionalmente, un nuevo "refresh token".
+4. **Renovación del Token de Acceso:** La aplicación envía una solicitud al servidor de autorización (a menudo utilizando un 
+punto final dedicado) junto con el "refresh token". Si el "refresh token" es válido, el servidor emite un nuevo token de acceso
+y, opcionalmente, un nuevo "refresh token".
 
-Este mecanismo proporciona una capa adicional de seguridad, ya que el "refresh token" generalmente tiene una duración más larga y se almacena de forma más segura que el token de acceso. Si un token de acceso se ve comprometido, su vida útil es limitada y, además, es posible revocar el "refresh token" si es necesario.
+Este mecanismo proporciona una capa adicional de seguridad, ya que el "refresh token" generalmente tiene una duración más larga
+y se almacena de forma más segura que el token de acceso. Si un token de acceso se ve comprometido, su vida útil es limitada y,
+además, es posible revocar el "refresh token" si es necesario.
 
-En resumen, los "refresh tokens" son una parte esencial de la gestión de la autenticación y autorización en aplicaciones basadas en la arquitectura REST, permitiendo renovar
+En resumen, los "refresh tokens" son una parte esencial de la gestión de la autenticación y autorización en aplicaciones 
+basadas en la arquitectura REST, permitiendo renovar de manera segura y eficiente los tokens de acceso expirados, 
+lo que contribuye a mantener la seguridad y la continuidad del acceso a recursos protegidos sin necesidad de que el usuario 
+vuelva a autenticarse con sus credenciales.
+
+En ésta implementación de la REST API, se han incorporado ambos tokens para gestionar la autenticación de usuarios. Estos 
+tokens juegan un papel crucial durante la creación de cuentas de usuario. El Access Token se genera durante el proceso 
+de autenticación, verificándose cuando el cliente solicita el inicio de sesión. Para todos los casos, el usuario que esta 
+logueado solamente podrá ejecutar acciones sobre sí mismo. El middeware de autenticación utiliza refresh tokens. 
+Una vez que se venció el access token, pero no el refresh, se enviará automáticamente en el header el nuevo access token, 
+que además se guardará en la BD. Esto evitará que el usuario se tenga que loguear nuevamente. Esta última acción, se deberá 
+realizar solamente cuando el refresh token esté vencido y en ese caso el usuario recibirá un mensaje para que se vuelva a 
+loguear. Adicionalmente, en el proceso de cierre de sesión, se genera un Refresh Token para revocar el acceso y asegurar la 
+terminación automática de la sesión.
+

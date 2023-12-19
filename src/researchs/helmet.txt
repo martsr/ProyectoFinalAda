@@ -1,7 +1,27 @@
-Link de referencia: https://helmetjs.github.io
+## HELMET 
 
+Helmet es una herramienta que se enfoca en reforzar la seguridad de aplicaciones web, y aunque no es una solución completa 
+por sí sola, ayuda a prevenir varios tipos de ataques comunes arrojados por su misma página web:
 
-Ayuda a mitigar varios ataques seteando los headers the respuesta de HTTP. 
-Se tiene que instalar en app. Seguir esta documentacion: 
+1. Ataques XSS (Cross-Site Scripting): 
+Protege contra ataques que intentan insertar scripts maliciosos en páginas web visitadas por otros usuarios.
 
-https://expressjs.com/en/advanced/best-practice-security.html#use-helmet
+2. Ataques de inyección de código: 
+Evita la inyección de código malicioso al configurar el encabezado Content-Security-Policy, que controla de dónde se pueden 
+cargar recursos como scripts, estilos, imágenes, etc.
+
+3. Ataques de sniffing de MIME: 
+Ayuda a prevenir que los navegadores intenten interpretar incorrectamente el tipo MIME de los recursos con el encabezado 
+X-Content-Type-Options, protegiendo contra posibles vulnerabilidades.
+
+4. Ataques de clickjacking: Mitiga los ataques de clickjacking mediante la configuración del encabezado X-Frame-Options, 
+el cual controla si tu sitio web puede ser cargado dentro de un iframe en otros sitios.
+
+5. Ataques de inundación de solicitudes (rate limiting): Aunque no es parte directa de Helmet, su uso puede combinarse 
+con otras herramientas para implementar límites en la tasa de solicitudes, lo que ayuda a mitigar ataques de denegación 
+de servicio (DoS) y fuerza bruta.
+
+En conclusión, Helmet contribuye a prevenir al configurar y establecer ciertos encabezados HTTP recomendados para mejorar 
+la seguridad de las aplicaciones web. Es importante destacar que Helmet no es una solución única, pero sí es una capa 
+valiosa en la seguridad de tu aplicación. Combinarla con otras prácticas de seguridad es fundamental para tener una 
+defensa más sólida contra una variedad de ataques potenciales.
